@@ -65,7 +65,7 @@ public class MainLoader3 {
                     employeeManyMany = createEmployeeManyMany(employeeManyMany);
                     System.out.println(employeeManyMany);
                     break;
-                /*case 22:
+                case 22:
                     employeeManyMany = getEmployeeManyMany(employeeManyMany);
                     System.out.println(employeeManyMany);
                     break;
@@ -75,7 +75,7 @@ public class MainLoader3 {
                     break;
                 case 24:
                     deleteEmployeeManyMany(employeeManyMany);
-                    break;*/
+                    break;
 
                 default:
                     break;
@@ -282,5 +282,52 @@ public class MainLoader3 {
         employeeManyManyDao.saveOrUpdate(employee);
 
         return employee;
+    }
+
+    public static EmployeeManyMany getEmployeeManyMany (EmployeeManyMany employee) throws DaoException{
+        System.out.println("Get EmployeeManyMany by Id.");
+        System.out.print("Id - ");
+        Scanner scanner = new Scanner(System.in);
+        Integer id = scanner.nextInt();
+
+        employee = employeeManyManyDao.get(id);
+        return employee;
+    }
+
+    public static EmployeeManyMany updateEmployeeManyMany (EmployeeManyMany employee) throws DaoException{
+        System.out.println("Update EmployeeManyMany by Id.");
+        System.out.print("Id - ");
+        Scanner scanner = new Scanner(System.in);
+        Integer id = scanner.nextInt();
+
+        employee = employeeManyManyDao.get(id);
+
+        System.out.print("Add new MEETING by ID - ");
+        scanner = new Scanner(System.in);
+        MeetingManyMany meeting = meetingManyManyDao.get(scanner.nextInt());
+        if (meeting == null) {
+            System.out.println("Meeting doesn't exist. Please enter a new Meeting SUBJECT - ");
+            scanner = new Scanner(System.in);
+            meeting = createNewMeeting(scanner.nextLine());
+        }
+        employee.getMeetings().add(meeting);
+        meeting.getEmployees().add(employee);
+
+        employeeManyManyDao.saveOrUpdate(employee);
+        return employee;
+    }
+
+    public static void deleteEmployeeManyMany (EmployeeManyMany employee) throws DaoException{
+        System.out.println("Delete EmployeeManyMany by Id.");
+        System.out.print("Id - ");
+        Scanner scanner = new Scanner(System.in);
+        Integer id = scanner.nextInt();
+
+        employee = employeeManyManyDao.get(id);
+        if (employee != null) {
+            employeeManyManyDao.delete(employee);
+        } else {
+            System.out.println("No such EmployeeManyMany in DataBase!");
+        }
     }
 }

@@ -38,9 +38,13 @@ public class MeetingManyMany implements Serializable{
 
     @Override
     public String toString() {
+        String allEmployees = "";
+        for (EmployeeManyMany empl : employees) {
+            allEmployees = allEmployees.concat(empl.getEid() + ", ");
+        }
         return "MeetingManyMany{" +
                 "subject='" + subject + '\'' +
-                ", employees.size()=" + employees.size() +
+                ", employees=" + allEmployees +
                 '}';
     }
 }

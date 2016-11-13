@@ -38,9 +38,13 @@ public class DepartmentOneMany implements Serializable{
 
     @Override
     public String toString() {
+        String allEmployees = "";
+        for (EmployeeOneMany empl : employees) {
+            allEmployees = allEmployees.concat(empl.getEid() + ", ");
+        }
         return "DepartmentOneMany{" +
-                "employees.size=" + employees.size() +
-                ", depName='" + depName + '\'' +
+                "depName='" + depName + '\'' +
+                ", employees=" + allEmployees +
                 '}';
     }
 }

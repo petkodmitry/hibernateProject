@@ -47,11 +47,15 @@ public class EmployeeManyMany implements Serializable{
 
     @Override
     public String toString() {
+        String allMeetings = "";
+        for (MeetingManyMany meet : meetings) {
+            allMeetings = allMeetings.concat(meet + ", ");
+        }
         return "EmployeeManyMany{" +
                 "eid=" + eid +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", meetings.size()=" + meetings.size() +
+                ", meetings=" + allMeetings +
                 '}';
     }
 }

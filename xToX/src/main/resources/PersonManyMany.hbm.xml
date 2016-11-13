@@ -11,7 +11,7 @@
         <id name="eid" type="int" column="F_EID">
             <generator class="increment"/>
         </id>
-        <set name="meetings" table="T_EMPLOYEE_MEETING" inverse="false" cascade="all">
+        <set name="meetings" table="T_EMPLOYEE_MEETING" inverse="false" cascade="save-update">
             <key column="F_EID2"/>
             <many-to-many column="F_MID2" class="MeetingManyMany"/>
         </set>
