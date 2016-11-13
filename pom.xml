@@ -29,5 +29,6 @@
         <module>hibernate-xml-person</module>
         <module>mappingRelationship</module>
         <module>xToX</module>
+        <module>xToXAnnotations</module>
     </modules>
 </project>
