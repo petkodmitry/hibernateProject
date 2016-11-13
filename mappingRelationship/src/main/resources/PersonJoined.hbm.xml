@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping
+        default-lazy="true"
+        package="by.academy.it.pojos2"
+        auto-import="false"
+        catalog="my_db"
+>
+    <class name="by.academy.it.pojos2.PersonJoined" table="T_PERSON_JOINED">
+        <id name="id" type="int" column="F_ID">
+            <generator class="increment"/>
+        </id>
+        <property name="name" column="F_NAME" type="string"/>
+        <property name="surname" column="F_SURNAME" type="string"/>
+        <property name="age" column="F_AGE" type="int"/>
+        <joined-subclass name="EmployeeJoined">
+            <key column="F_ID"/>
+            <property name="company"/>
+            <property name="salary"/>
+        </joined-subclass>
+        <joined-subclass name="StudentJoined">
+            <key column="F_ID"/>
+            <property name="faculty"/>
+            <property name="mark"/>
+        </joined-subclass>
+    </class>
+</hibernate-mapping>

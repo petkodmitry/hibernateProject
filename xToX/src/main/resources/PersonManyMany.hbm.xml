@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping
+        default-lazy="true"
+        package="by.academy.it.pojos3"
+        auto-import="false"
+        catalog="my_db3"
+>
+    <class name="by.academy.it.pojos3.EmployeeManyMany" table="T_PERSON_MANYMANY">
+        <id name="eid" type="int" column="F_EID">
+            <generator class="increment"/>
+        </id>
+        <set name="meetings" table="T_EMPLOYEE_MEETING" inverse="false" cascade="all">
+            <key column="F_EID2"/>
+            <many-to-many column="F_MID2" class="MeetingManyMany"/>
+        </set>
+        <property name="name" column="F_NAME" type="string"/>
+        <property name="surname" column="F_SURNAME" type="string"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping
+        default-lazy="true"
+        package="by.academy.it.pojos2"
+        auto-import="true"
+        catalog="my_db"
+>
+    <class name="Car" table="CAR" mutable="true" dynamic-insert="true" dynamic-update="true">
+        <id name="cid" type="int" column="F_CID">
+            <generator class="increment"/>
+        </id>
+
+        <property name="brand" column="F_BRAND" type="string" update="false"/>
+        <property name="model" column="F_MODEL" type="string"/>
+        <property name="year" column="F_YEAR" type="int" access="field" update="false"/>
+        <property name="carAge" type="int" formula="2016 - F_YEAR"/>
+    </class>
+</hibernate-mapping>
