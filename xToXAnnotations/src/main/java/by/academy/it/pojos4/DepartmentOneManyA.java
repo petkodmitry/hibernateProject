@@ -1,9 +1,12 @@
 package by.academy.it.pojos4;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name = "t_dep_onemany")
 public class DepartmentOneManyA implements Serializable{
     private static final long serialVersionUID = 1L;
     private Integer did;
@@ -12,6 +15,9 @@ public class DepartmentOneManyA implements Serializable{
 
     public DepartmentOneManyA() {}
 
+    @Id
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer getDid() {
         return did;
     }
@@ -20,6 +26,7 @@ public class DepartmentOneManyA implements Serializable{
         this.did = did;
     }
 
+    @Column
     public String getDepName() {
         return depName;
     }
@@ -28,6 +35,7 @@ public class DepartmentOneManyA implements Serializable{
         this.depName = depName;
     }
 
+    @OneToMany(mappedBy = "department")
     public Set<EmployeeOneManyA> getEmployees() {
         return employees;
     }

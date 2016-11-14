@@ -20,6 +20,7 @@ public class MainLoader4 {
         EmployeeOneOneA employeeOneOneA = null;
         EmployeeOneManyA employeeOneManyA = null;
         EmployeeManyManyA employeeManyManyA = null;
+        MeetingManyManyA meetingManyManyA = null;
 
         while (true) {
             printMenu();
@@ -76,6 +77,9 @@ public class MainLoader4 {
                 case 24:
                     deleteEmployeeManyMany(employeeManyManyA);
                     break;
+                case 25:
+                    deleteMeetingManyMany(meetingManyManyA);
+                    break;
 
                 default:
                     break;
@@ -102,6 +106,7 @@ public class MainLoader4 {
         System.out.println("        22. Read(Get) EmployeeManyManyA+MeetingManyManyA");
         System.out.println("        23. Update EmployeeManyManyA+MeetingManyManyA");
         System.out.println("        24. Delete EmployeeManyManyA+MeetingManyManyA");
+        System.out.println("        25. Delete MeetingManyManyA+EmployeeManyManyA");
     }
 
     public static EmployeeOneOneA createEmployeeOne(EmployeeOneOneA employee) throws DaoException4 {
@@ -328,6 +333,20 @@ public class MainLoader4 {
             employeeManyManyADao.delete(employee);
         } else {
             System.out.println("No such EmployeeManyManyA in DataBase!");
+        }
+    }
+
+    public static void deleteMeetingManyMany (MeetingManyManyA meeting) throws DaoException4 {
+        System.out.println("Delete MeetingManyManyA by Id.");
+        System.out.print("Id - ");
+        Scanner scanner = new Scanner(System.in);
+        Integer id = scanner.nextInt();
+
+        meeting = meetingManyManyADao.get(id);
+        if (meeting != null) {
+            meetingManyManyADao.delete(meeting);
+        } else {
+            System.out.println("No such MeetingManyManyA in DataBase!");
         }
     }
 }

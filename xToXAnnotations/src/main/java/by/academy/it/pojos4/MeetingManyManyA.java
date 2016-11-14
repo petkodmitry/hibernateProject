@@ -1,9 +1,18 @@
 package by.academy.it.pojos4;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name = "t_meeting_manymany")
 public class MeetingManyManyA implements Serializable{
     private static final long serialVersionUID = 2L;
     private int mid;
@@ -12,6 +21,9 @@ public class MeetingManyManyA implements Serializable{
 
     public MeetingManyManyA() {}
 
+    @Id
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getMid() {
         return mid;
     }
@@ -20,6 +32,7 @@ public class MeetingManyManyA implements Serializable{
         this.mid = mid;
     }
 
+    @Column
     public String getSubject() {
         return subject;
     }
@@ -28,6 +41,13 @@ public class MeetingManyManyA implements Serializable{
         this.subject = subject;
     }
 
+    @ManyToMany(targetEntity = EmployeeManyManyA.class, mappedBy = "meetings")
+//    @Cascade(CascadeType.SAVE_UPDATE)
+//    @Cascade(CascadeType.ALL)     // удаляет всех связанных работников
+    /*@JoinTable(name = "t_employee_meeting"
+            , joinColumns = @JoinColumn(name = "f_mid2")
+            , inverseJoinColumns = @JoinColumn(name = "f_eid2")
+    )*/
     public Set<EmployeeManyManyA> getEmployees() {
         return employees;
     }

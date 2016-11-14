@@ -1,8 +1,11 @@
 package by.academy.it.pojos4;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.Entity;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
@@ -45,7 +48,8 @@ public class EmployeeOneOneA implements Serializable{
         this.surname = surname;
     }
 
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "employee"/*, cascade = CascadeType.ALL*/)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @PrimaryKeyJoinColumn
 //    @JoinColumn(name = "f_eid", referencedColumnName = "eid")
     public DepartmentOneOneA getDetails() {
