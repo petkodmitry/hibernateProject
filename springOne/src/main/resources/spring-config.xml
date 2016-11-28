@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+    <bean id="emailSender" class="com.petko.senders.EmailSender">
+        <property name="details" value="email_sender"/>
+    </bean>
+    <bean id="senderService" class="com.petko.SenderService">
+        <property name="sender" ref="emailSender"/>
+    </bean>
+    <bean id="notifier" class="com.petko.Notifier"/>
+
+    <aop:config>
+        <aop:aspect id="sending" ref="notifier">
+            <aop:pointcut id="advice" expression="execution(* *.sendMessage(..))" />
+            <aop:before pointcut-ref="advice" method="notifyBefore"/>
+            <aop:after pointcut-ref="advice" method="notifyAfter"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

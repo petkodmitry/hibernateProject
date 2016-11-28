@@ -422,7 +422,7 @@ public class MainLoader {
             personComponentDao.delete(person);
         } catch (DaoException e) {
             log.error(e, e);
-        } catch (NullPointerException e) {
+        } catch (IllegalArgumentException | NullPointerException e) {
             log.error("Unable delete person:", e);
         }
     }

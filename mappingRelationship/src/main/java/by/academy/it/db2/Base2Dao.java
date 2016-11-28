@@ -72,7 +72,7 @@ public class Base2Dao<T> implements Dao2<T> {
             session.delete(t);
             transaction.commit();
             log.info("Delete:" + t);
-        } catch (HibernateException e) {
+        } catch (IllegalArgumentException | HibernateException e) {
             log.error("Error delete " + getPersistentClass() + " in Dao2" + e);
             transaction.rollback();
             throw new DaoException(e);
